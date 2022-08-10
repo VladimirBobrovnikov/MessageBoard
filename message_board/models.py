@@ -46,3 +46,6 @@ class Reaction(models.Model):
 	def approve(self):
 		self.approved = True
 		self.save()
+
+	def del_instance(self):
+		pass
