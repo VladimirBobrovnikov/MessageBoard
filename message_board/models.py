@@ -4,9 +4,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Advertisement(models.Model):
-	id = models.AutoField()
+	id = models.AutoField(primary_key=True)
 	author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='advertisements')
-	title = models.CharField(max_length=64, null=False)
+	title = models.CharField(max_length=64, blank=False)
 	create_datetime = models.DateTimeField(auto_now_add=True)
 	category = models.CharField(
 		max_length=2,
@@ -24,8 +24,8 @@ class Advertisement(models.Model):
 		],
 		default='TA'
 	)
-	# Танки, Хилы, ДД, Торговцы, Гилдмастеры, Квестгиверы, Кузнецы, Кожевники, Зельевары, Мастера заклинаний
-	# Tanks, Healers, DD, Merchants, Guild Masters, Quest Givers, Blacksmiths, Tanners, Potion Makers, Spell Masters
+	image = models.ImageField(upload_to='images/', null=True, blank=True)
+	file = models.FileField(upload_to='files/', null=True, blank=True)
 
 	class Meta:
 		verbose_name = _("advertisement")
@@ -33,9 +33,9 @@ class Advertisement(models.Model):
 
 
 class Reaction(models.Model):
-	id = models.AutoField()
+	id = models.AutoField(primary_key=True)
 	advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name='reactions')
-	text = models.TextField(null=False)
+	text = models.TextField(blank=False)
 	create_datetime = models.DateTimeField(auto_now_add=True)
 	approved = models.BooleanField(default=False)
 
