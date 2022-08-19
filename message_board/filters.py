@@ -1,13 +1,16 @@
-# from django_filters import FilterSet, DateFilter, ModelChoiceFilter, ModelMultipleChoiceFilter, ChoiceFilter
-# from .models import Advertisement, CHOICES_CATEGORY
-# from django.forms.widgets import SelectDateWidget
-#
-#
-# class AdvertisementFilter(FilterSet):
-#     author_choice = ModelChoiceFilter(field_name='author', queryset=Author.objects.all(), label='Автор:')
-#     created__gte = DateFilter(field_name='date_time_in', lookup_expr='gte', label='Дата публикации (не ранее):', widget=SelectDateWidget)
-#     category_choice = ChoiceFilter(field_name='category', choices=CHOICES_CATEGORY, label='Категория:')
-#
-#     class Meta:
-#         model = Advertisement
-#         fields = {}
+from django_filters import FilterSet, ModelChoiceFilter
+from .models import Reaction, Advertisement
+from django.contrib.auth import get_user_model
+
+
+# создаём фильтр
+class ReactionFilter(FilterSet):
+	advertisement_choice = ModelChoiceFilter(
+		field_name='author',
+		queryset=Advertisement.objects.filter(author=get_user_model()),
+		label='Объявление:'
+	)
+
+	class Meta:
+		model = Reaction
+		fields = {}
