@@ -35,17 +35,32 @@ class Author(models.Model):
 		return f'Автор: {self.user.username}'
 
 
+class Category(models.Model):
+	id = models.AutoField()
+	name = models.CharField(
+		max_length=2,
+		choices=CHOICES_CATEGORY,
+		default='TA'
+	)
+
+	class Meta:
+		verbose_name = _("category")
+		verbose_name_plural = _("categories")
+
+	def __unicode__(self):
+		return self.name
+
+	def __str__(self):
+		return self.name
+
+
 class Advertisement(models.Model):
 	id = models.AutoField(primary_key=True)
 	author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='advertisements')
 	title = models.CharField(max_length=64, blank=False)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
-	category = models.CharField(
-		max_length=2,
-		choices=CHOICES_CATEGORY,
-		default='TA'
-	)
+	category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='advertisements')
 	content = RichTextUploadingField()
 
 	class Meta:
@@ -62,7 +77,6 @@ class Advertisement(models.Model):
 		return "/%s/" % self.id
 
 
-
 class ItemBase(models.Model):
 	id = models.AutoField()
 	advertisement = models.ForeignKey(Advertisement, blank=False, null=False)
@@ -74,8 +88,8 @@ class ItemBase(models.Model):
 	class Meta:
 		abstract = True
 
-	def __str__(self):
-		return self.title
+	def get_absolute_url(self):
+		return "/%s/" % self.id
 
 
 class Text(ItemBase):
@@ -96,6 +110,7 @@ class Video(ItemBase):
 
 class Reaction(models.Model):
 	id = models.AutoField(primary_key=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='advertisements')
 	advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name='reactions')
 	text = models.TextField(blank=False)
 	created = models.DateTimeField(auto_now_add=True)

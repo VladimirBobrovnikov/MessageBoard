@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+ 
+{% block head_title %}
+Advertisement
+{% endblock head_title %}
+ 
+{% block content %}
+   <h1>Объявление</h1> <br>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Создать объявление">
+    </form>
+{% endblock content %}

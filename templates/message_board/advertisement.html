@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+ 
+{% block head_title %}
+Advertisement
+{% endblock head_title %}
+ 
+{% block content %}
+    <h1>Объявление</h1> <br>
+    <h2>{{ advertisement.title }}</h2>
+    {{ advertisement.created }} <br>
+    <h4>{{ advertisement.category.name }} <br></h4>
+    <h4>{{ advertisement.author }} <br></h4>
+    {{ advertisement.content }} <br>
+    {{ advertisement.updated }} <br>
+{% endblock content %}

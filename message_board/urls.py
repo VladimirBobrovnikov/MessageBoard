@@ -18,10 +18,10 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
+from .views import AdvertisementListView, AdvertisementDetailView
 
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    # path('ckeditor/', include('ckeditor_uploader.urls')),
-    # path('/', include('message_board.urls')),
+    path('', AdvertisementListView.as_view(), 'advertisement_list'),
+    path('<int:pk>', AdvertisementDetailView.as_view(), 'advertisement_single'),
 ]
