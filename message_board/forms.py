@@ -1,15 +1,22 @@
-from django.forms import ModelForm, ModelChoiceField, CharField, Select, Textarea
-from .models import Advertisement, Author, CHOICES_CATEGORY
+from django.forms import ModelForm, CharField, Select, TextInput, Textarea
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+
+from .models import Advertisement, CHOICES_CATEGORY, Reaction
 
 
 class AdvertisementForm(ModelForm):
-    author = ModelChoiceField(queryset=Author.objects.all(), label='Автор:')
     category = CharField(label='Категория:', widget=Select(choices=CHOICES_CATEGORY))
-    title = CharField(label='Заголовок', max_length=255)
-    text = CharField(label='Текст статьи', widget=Textarea())
+    title = CharField(label='Заголовок', widget=TextInput(attrs={'class': 'form-control'}))
+    content = CharField(label='Текст', widget=CKEditorUploadingWidget(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Advertisement
-        fields = [
-            'author', 'category', 'title', 'text',
-        ]
+        exclude = ('author',)
+
+
+class ReactionForm(ModelForm):
+    text = CharField(label='Текст', widget=Textarea(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Reaction
+        fields = ('text',)
