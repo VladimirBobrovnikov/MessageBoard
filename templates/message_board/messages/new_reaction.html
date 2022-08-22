@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Появился новый отклик на ваш пост {{ reaction.advertisement.title }}</h2>
+<p>{{ reaction.author.first_name }} откликнулся на ваш пост.</p>
+<p>Перейдите по <a href="http://127.0.0.1:8000/posts/{{ reaction.advertisement.pk }}/reaction">ссылке</a> для выполнения действий.</p>
+</body>
+</html>

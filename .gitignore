@@ -238,3 +238,6 @@ dmypy.json
 cython_debug/
 
 db.sqlite3
+
+static/admin/
+static/ckeditor/
