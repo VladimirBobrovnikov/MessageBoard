@@ -249,6 +249,3 @@ EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = DEFAULT_FROM_EMAIL  # это будет у нас вместо аргумента FROM в массовой рассылке
-MANAGERS = [
-    ('Vovka', ''),
-]

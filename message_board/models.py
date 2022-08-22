@@ -50,7 +50,7 @@ class Reaction(models.Model):
 	text = models.TextField(blank=False)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
-	approved = models.BooleanField(default=False)
+	approved = models.BooleanField(default=None, blank=True, null=True)
 
 	class Meta:
 		verbose_name = "reaction"
