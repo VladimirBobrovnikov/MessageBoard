@@ -12,4 +12,9 @@ Advertisement
     <h4>{{ advertisement.author }} <br></h4>
     {{ advertisement.content }} <br>
     {{ advertisement.updated }} <br>
+    <br>
+
+    <a href="{% url 'advertisement_create' %}">Откликнуться на объявление</a>
+    <br>
+
 {% endblock content %}
