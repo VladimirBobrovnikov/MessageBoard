@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+ 
+{% block head_title %}
+Reaction
+{% endblock head_title %}
+ 
+{% block content %}
+    <h1>Отклик</h1> <br>
+    <h2>{{ reaction.text }}</h2>
+    {{ reaction.created }} <br>
+    <h4>{{ reaction.author }} <br></h4>
+    {{ reaction.updated }} <br>
+    <br>
+    {%  if user == reaction.advertisement.author %}
+    <a href="{% url 'reaction_confirm' advertisement_pk=reaction.advertisement.id reaction_id=reaction.id %}">Принять отклик</a>
+    <br>
+    <a href="{% url 'reaction_delete' advertisement_pk=reaction.advertisement.id reaction_id=reaction.id %}">Удалить отклик</a>
+    <br>
+    {% else %}
+        Режим просмотра
+        <br>
+    {% endif %}
+
+{% endblock content %}

@@ -8,6 +8,8 @@ from .views import (
     ReactionUpdateView,
     ReactionCreateView,
     ReactionDetailView,
+    confirm,
+    delete_reaction,
 )
 
 
@@ -22,6 +24,6 @@ urlpatterns = [
     path('<int:advertisement_pk>/reaction/create/<int:reaction_id>/', ReactionUpdateView.as_view(), name='reaction_update'),
     path('<int:advertisement_pk>/reaction/<int:reaction_id>/', ReactionDetailView.as_view(), name='reaction_single'),
 
-    # confirm
-    # delete reaction
+    path('<int:advertisement_pk>/reaction/<int:reaction_id>/confirm', confirm, name='reaction_confirm'),
+    path('<int:advertisement_pk>/reaction/<int:reaction_id>/delete', delete_reaction, name='reaction_delete'),
 ]
